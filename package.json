@@ -8,7 +8,10 @@
     "check": "tsc --noEmit",
     "start": "ts-node src/index.ts",
     "start:prod": "npm run build && node public/index.js",
-    "bd:prod": "npx prisma migrate dev &&npx generate --schema./server/schemas/"
+    "bd:prod": "npx prisma migrate dev &&npx generate --schema./server/schemas/",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write ."
+
   },
   "keywords": [],
   "author": "",
@@ -34,6 +37,7 @@
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.7",
     "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
     "prisma": "^5.21.1",
     "swagger-autogen": "^2.23.7",
     "ts-node": "^10.9.2",
