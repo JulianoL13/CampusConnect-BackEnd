@@ -1,7 +1,5 @@
 # Campus-Connect 🚀
 
-A brief description of what this project does and who it's for. [Add a concise project description here]
-
 [![Express.js](https://img.shields.io/badge/Express.js-green.svg)](https://expressjs.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-blue.svg)](https://www.typescriptlang.org/)
 [![Prisma](https://img.shields.io/badge/Prisma-purple.svg)](https://www.prisma.io/)
