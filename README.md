@@ -1,123 +1,150 @@
-# Project Title 🚀
+# Campus-Connect 🚀
 
-A paragraph describing the project goes here.
+A brief description of what this project does and who it's for. [Add a concise project description here]
+
+[![Express.js](https://img.shields.io/badge/Express.js-green.svg)](https://expressjs.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-blue.svg)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-purple.svg)](https://www.prisma.io/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-blue.svg)](https://www.postgresql.org/)
+[![JWT](https://img.shields.io/badge/JWT-Authentication-red.svg)](https://jwt.io/)
+[![Bcrypt](https://img.shields.io/badge/Bcrypt-orange.svg)](https://www.npmjs.com/package/bcrypt)
 
 ## Project Structure 📁
 
-Below is the structure of the project, organized to facilitate navigation and understanding:
-
 ```
 📦 root/
-├── 📁 client/
-│   ├── 📁 public/
-│   └── 📁 src/
-│       ├── 📁 assets/
-│       ├── 📁 components/
-│       ├── 📁 pages/
-│       ├── 📁 services/
-│       └── 📁 styles/
-├── 📄 COLABORATION.md
-├── 📁 docs/
-│   ├── 📄 api-docs.md
-│   ├── 📄 architecture.md
-│   └── 📄 requirements.md
+├── 📁 docs/               # Project documentation
+├── 📁 prisma/            # Database configuration and migrations
+│   ├── 📁 schema/        # Prisma schema definitions
+│   └── 📁 migrations/    # Database migrations
+├── 📁 src/               # Source code
+│   ├── 📁 config/        # Configuration files
+│   ├── 📁 controllers/   # Request handlers
+│   ├── 📁 middleware/    # Express middleware
+│   ├── 📁 models/        # Data models
+│   ├── 📁 repositories/  # Data access layer
+│   ├── 📁 routes/        # API routes
+│   ├── 📁 utils/         # Utility functions
+│   └── 📄 index.ts       # Application entry point
 ├── 📄 package.json
-├── 📄 package-lock.json
-├── 📄 README.md
-├── 📁 scripts/
-├── 📁 server/
-│   └── 📁 src/
-│       ├── 📁 config/
-│       ├── 📁 controllers/
-│       ├── 📁 middleware/
-│       ├── 📁 models/
-│       ├── 📄 package.json
-│       ├── 📄 package-lock.json
-│       ├── 📁 routes/
-│       ├── 📄 server.js
-│       └── 📁 utils/
+└── 📄 package-lock.json
 ```
 
-## Getting Started 🛠️
+## Prerequisites 📋
 
-These instructions will allow you to get a copy of the project up and running on your local machine for development and testing purposes. See **[Deployment](#-deployment)** for instructions on how to deploy the project.
+Before you begin, ensure you have installed:
 
-### Prerequisites 📋
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+- PostgreSQL (v14 or higher) [if using PostgreSQL]
 
-What things you need to install the software and how to install them?
+## Installation ⚙️
 
-### Installation ⚙️
+1. Clone the repository:
+```bash
+git clone https://github.com/JulianoL13/CampusConnect-BackEnd
+cd CampusConnect-BackEnd
+```
 
-First, you need to clone the repository to your local machine. Open your terminal and run::
-```
-git clone <repository-url>
-```
-Navigate to server directory inside root:
-```
-cd server/
-```
-Run the following command to install necessary packages::
-```
+2. Install dependencies:
+```bash
 npm install
 ```
-After installing the dependencies, you can start the backend server. This is done with:
+
+3. Create a `.env` file in the root directory and add your environment variables:
+```env
+DATABASE_URL="your-database-url"
+JWT_SECRET="your-jwt-secret"
+JWT_EXPIRES_IN="your-jwt-expires-in"
+PORT=3000
 ```
-npm run start #without nodemon
 
-npm run dev #with nodemon
+4. Run database migrations:
+```bash
+npm run bd:prod
+
+#or  
+
+npx prisma migrate dev
 ```
 
-Finish with an example of how to retrieve data from the system or how to use it for a small demonstration.
+5. Start the development server:
+```bash
+npm run dev     # Development mode with hot-reload
+# or
+npm start       # Production mode
+```
 
-## Running Tests ✅
+## Tech Stack 🛠️
 
-Explain how to run the automated tests for this system.
+### Core Technologies
+- **Framework:** [Express.js](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
+- **Language:** [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- **Database:** [PostgreSQL](https://www.postgresql.org/) - Advanced open source relational database
 
-### End-to-End Testing 🔍
+### ORM & Database Tools
+- **ORM:** [Prisma](https://www.prisma.io/) - Next-generation Node.js and TypeScript ORM
+- **Migrations:** Prisma Migrations - Version control for your database schema
 
-Explain what these tests check and why.
+### Authentication & Security
+- **JWT:** [JSON Web Tokens](https://jwt.io/) - For secure authentication and authorization
+- **Password Hashing:** [Bcrypt](https://www.npmjs.com/package/bcrypt) - For secure password hashing
 
-### Style Guide Testing 🎨
+### Development Tools
+- **Runtime:** Node.js
+- **Package Manager:** npm
+- **Development Server:** nodemon - For hot-reload during development
+- **Code Quality:**
+  - Prettier - For code formatting
+  - TypeScript compiler - For static type checking
 
-Explain what these tests check and why.
-
-## Deployment 📦
-
-Add additional notes on how to deploy this on a live system.
-
-## Built With 🛠️
-
-Mention the tools you used to create your project.
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Manager
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS
+### API Development
+- **Request Handling:** Express.js Router
+- **API Documentation:** Swagger/OpenAPI
 
 ## Contributing 🤝
 
-Please read the [CONTRIBUTING.md](https://gist.github.com/user/linkToContributionInfo) for details on our code of conduct and the process for submitting pull requests.
+We welcome contributions! Please see our [Contributing Guidelines](https://github.com/JulianoL13/CampusConnect-BackEnd/blob/main/COLLABORATION.md) for details.
 
-## Versioning 🔖
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-We use [SemVer](http://semver.org/) for versioning. For the available versions, see the [tags in this repository](https://github.com/your/tags/of/project).
+## Team ✨
 
-## Authors ✒️
+### Backend Team
+- [Juliano Laranjeira](https://github.com/JulianoL13) - Lead Backend Developer
+- [Pablo Montes](https://github.com/itspablomontes) - Backend Developer
 
-Mention all those who helped to raise the project from its inception.
-
-* **A Developer** - *Initial Work* - [adeveloper](https://github.com/linkToProfile)
-* **Fulano De Tal** - *Documentation* - [fulanodetal](https://github.com/linkToProfile)
-
-You can also see the list of all [contributors](https://github.com/user/project/contributors) who participated in this project.
+### Frontend Team
+- [Thiago Miranda](https://github.com/Thiiagodev) - Frontend Developer
+- [Carlos Eduardo Albuquerque](https://github.com/CarllosEduardo07) - Frontend Developer
 
 ## License 📄
 
-This project is licensed under (your license) - see the [LICENSE.md](https://github.com/user/project/license) file for details.
+This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments 🙏
 
-* Tell others about this project 📢;
-* Invite someone from the team for a beer 🍺;
-* A public thank you 🫂;
-* etc.
+### Special Thanks
+- To Wyden FACIMP, for all support and resources provided for us, students
+- To our professor Wellinton who guided us through the development process
+- To the open-source community for the amazing tools and libraries that made this project possible
 
+### Development Support
+- Thanks to the [Express.js](https://expressjs.com/) community for the excellent documentation
+- Thanks to [Prisma](https://www.prisma.io/) team for building such an amazing ORM
+- Thanks to [TypeScript](https://www.typescriptlang.org/) team for the incredible type system
+
+### Design & Inspiration
+- Inspired by the need to improve campus connectivity and student interaction
+- UI/UX design inspired by modern educational platforms
+
+### Contributors
+- Thanks to all students who participated in testing
+- Thanks to everyone who reported bugs and suggested features
+
+---
+Made with ❤️ by the Campus-Connect Team
