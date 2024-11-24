@@ -8,7 +8,7 @@
     "check": "tsc --noEmit",
     "start": "ts-node src/index.ts",
     "start:prod": "npm run build && node public/index.js",
-    "bd:prod": "npx prisma migrate dev &&npx generate --schema./server/schemas/",
+    "bd:prod": "npx prisma migrate dev &&npx generate --schema./prisma/schemas/",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write ."
 
