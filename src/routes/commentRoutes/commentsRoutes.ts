@@ -49,14 +49,18 @@ router.get(
   /* authMiddleware.authenticateToken, */
   (req, res) => commentController.countChildComments(req, res),
 );
-router.post("/comments", authMiddleware.authenticateToken, (req, res) =>
-  commentController.createComment(req, res),
+router.post(
+  "/comments",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    commentController.createComment(req, res),
 );
 router.put("/comments/:id", authMiddleware.authenticateToken, (req, res) =>
   commentController.updateComment(req, res),
 );
-router.delete("/comments/:id", authMiddleware.authenticateToken, (req, res) =>
-  commentController.deleteComment(req, res),
+router.delete(
+  "/comments/:id",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    commentController.deleteComment(req, res),
 );
 router.get(
   "/comments/with-replies/:postId",

@@ -49,17 +49,23 @@ router.get(
   /* authMiddleware.authenticateToken, */
   (req, res) => postController.countPostsByCommunityId(req, res),
 );
-router.post("/posts", authMiddleware.authenticateToken, (req, res) =>
-  postController.createPost(req, res),
+router.post(
+  "/posts",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    postController.createPost(req, res),
 );
 router.put("/posts/:id", authMiddleware.authenticateToken, (req, res) =>
   postController.updatePost(req, res),
 );
-router.delete("/posts/:id", authMiddleware.authenticateToken, (req, res) =>
-  postController.deletePost(req, res),
+router.delete(
+  "/posts/:id",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    postController.deletePost(req, res),
 );
-router.get("/posts/cursor", authMiddleware.authenticateToken, (req, res) =>
-  postController.fetchPostsWithCursor(req, res),
+router.get(
+  "/posts/cursor",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    postController.fetchPostsWithCursor(req, res),
 );
 
 export default router;

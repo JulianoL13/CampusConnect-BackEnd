@@ -18,7 +18,7 @@ router.get(
 );
 router.post(
   "/comments/:commentId/vote",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => commentVoteController.toggleVote(req, res),
 );
 router.get(
