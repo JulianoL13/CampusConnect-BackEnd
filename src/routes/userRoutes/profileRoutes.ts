@@ -11,7 +11,7 @@ const authMiddleware = new AuthMiddleware();
 
 const router = Router();
 
-router.post("/profile", authMiddleware.authenticateToken, (req, res) =>
+router.post("/profile", (req, res) =>
   profileController.createProfile(req, res),
 );
 router.put("/profile/:id", authMiddleware.authenticateToken, (req, res) =>
