@@ -17,11 +17,15 @@ router.post("/profile", (req, res) =>
 router.put("/profile/:id", authMiddleware.authenticateToken, (req, res) =>
   profileController.updateProfile(req, res),
 );
-router.get("/profile", authMiddleware.authenticateToken, (req, res) =>
-  profileController.getProfiles(req, res),
+router.get(
+  "/profile",
+  /* authMiddleware.authenticateToken,  */ (req, res) =>
+    profileController.getProfiles(req, res),
 );
-router.get("/profile/:id", authMiddleware.authenticateToken, (req, res) =>
-  profileController.getProfileById(req, res),
+router.get(
+  "/profile/:id",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    profileController.getProfileById(req, res),
 );
 router.delete("profile/:id", authMiddleware.authenticateToken, (req, res) =>
   profileController.deleteProfile(req, res),

@@ -13,7 +13,7 @@ const router = Router();
 
 router.get(
   "/comments/:commentId/votes",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => commentVoteController.countVotes(req, res),
 );
 router.post(
@@ -23,7 +23,7 @@ router.post(
 );
 router.get(
   "/comments/:commentId/votes/user/:userId",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => commentVoteController.hasUserVoted(req, res),
 );
 
