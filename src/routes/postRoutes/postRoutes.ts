@@ -14,8 +14,10 @@ const authMiddleware = new AuthMiddleware();
 
 const router = Router();
 
-router.get("/posts", authMiddleware.authenticateToken, (req, res) =>
-  postController.getAllPosts(req, res),
+router.get(
+  "/posts",
+  /*authMiddleware.authenticateToken,*/ (req, res) =>
+    postController.getAllPosts(req, res),
 );
 router.get("/posts/:id", authMiddleware.authenticateToken, (req, res) =>
   postController.getPostById(req, res),
