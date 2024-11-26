@@ -12,11 +12,15 @@ const authMiddleware = new AuthMiddleware();
 const router = Router();
 
 // Rotas para gerenciar comunidades
-router.get("/communities", authMiddleware.authenticateToken, (req, res) =>
-  communityController.getCommunities(req, res),
+router.get(
+  "/communities",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    communityController.getCommunities(req, res),
 );
-router.get("/communities/:id", authMiddleware.authenticateToken, (req, res) =>
-  communityController.getCommunityById(req, res),
+router.get(
+  "/communities/:id",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    communityController.getCommunityById(req, res),
 );
 router.post("/communities", authMiddleware.authenticateToken, (req, res) =>
   communityController.createCommunity(req, res),
@@ -40,7 +44,7 @@ router.delete("/communityUser", authMiddleware.authenticateToken, (req, res) =>
 
 router.get(
   "/community/user/:id",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => communityController.findCommunityByUserId(req, res),
 );
 

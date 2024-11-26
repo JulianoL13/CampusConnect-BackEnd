@@ -14,35 +14,39 @@ const authMiddleware = new AuthMiddleware();
 
 const router = Router();
 
-router.get("/comments/cursor", authMiddleware.authenticateToken, (req, res) =>
-  commentController.fetchCommentsWithCursor(req, res),
+router.get(
+  "/comments/cursor",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    commentController.fetchCommentsWithCursor(req, res),
 );
-router.get("/comments", authMiddleware.authenticateToken, (req, res) =>
-  commentController.getAllComments(req, res),
+router.get(
+  "/comments",
+  /* authMiddleware.authenticateToken, */ (req, res) =>
+    commentController.getAllComments(req, res),
 );
 router.get(
   "/comments/profile/:profileId",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => commentController.getCommentsByProfileId(req, res),
 );
 router.get(
   "/comments/post/:postId",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => commentController.getCommentsByPostId(req, res),
 );
 router.get(
   "/comments/child/:parentCommentId",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => commentController.fetchChildComments(req, res),
 );
 router.get(
   "/comments/count/post/:postId",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => commentController.countCommentsByPostId(req, res),
 );
 router.get(
   "/comments/count/child/:parentCommentId",
-  authMiddleware.authenticateToken,
+  /* authMiddleware.authenticateToken, */
   (req, res) => commentController.countChildComments(req, res),
 );
 router.post("/comments", authMiddleware.authenticateToken, (req, res) =>
