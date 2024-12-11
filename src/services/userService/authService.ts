@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Role, User } from "@prisma/client";
 import { UserRepository } from "../../repositories/userRepository/userRepository";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -14,9 +14,8 @@ export class AuthService {
     jwtExpiration: string = "1h",
   ) {
     if (!jwtSecret) {
-      throw new Error(
-        "JWT_SECRET is not defined. Set it in the environment variables.",
-      );
+      console.log("JWT_SECTRET undefined, changing to fallback");
+      jwtSecret = "fallback";
     }
     this.userRepository = userRepository;
     this.JWT_SECRET = jwtSecret;
@@ -95,7 +94,7 @@ export class AuthService {
       throw new Error("Invalid email or password");
     }
 
-    const token = this.generateToken(user.id);
+    const token = this.generateToken(user.id, user.fullName);
 
     return {
       user: {
@@ -130,8 +129,8 @@ export class AuthService {
     return user;
   };
 
-  private generateToken = (userId: number): string => {
-    return jwt.sign({ userId }, this.JWT_SECRET, {
+  private generateToken = (userId: number, fullName: String): string => {
+    return jwt.sign({ userId, fullName }, this.JWT_SECRET, {
       expiresIn: this.JWT_EXPIRATION,
     });
   };

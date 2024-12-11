@@ -1,66 +1,61 @@
 model User {
-    id  Int @id @default(autoincrement())
-    fullName String
-    password String
-    email String @unique
-    birthDate DateTime?
-    phone String? @unique
-    cpf String @unique
-    registration String @unique
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    community UserCommunities[]
-    profile Profile?
-    postVote PostVote?
-    commentVote CommentVote?
-    roles userRole[]
-    course UserCourse[]
+  id           Int               @id @default(autoincrement())
+  fullName     String
+  password     String
+  email        String            @unique
+  birthDate    DateTime?
+  phone        String?           @unique
+  cpf          String            @unique
+  registration String            @unique
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  commentVote  CommentVote?
+  postVote     PostVote?
+  profile      Profile?
+  community    UserCommunities[]
+  course       UserCourse[]
+  roles        userRole[]
 }
 
 model Profile {
-    id  Int @id @default(autoincrement())
-    name String
-    bio String  @db.VarChar(150)
-    pic String
-    
-
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId Int @unique
-    comments Comment[]
-    posts Post[]
+  id       Int       @id @default(autoincrement())
+  name     String
+  bio      String    @db.VarChar(150)
+  pic      String
+  userId   Int       @unique
+  comments Comment[]
+  posts    Post[]
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Role {
-    id Int @id @default(autoincrement())
-    role String
-    description String?
-
-    users userRole[]
-    resource RoleResource[]
+  id          Int            @id @default(autoincrement())
+  role        String
+  description String?
+  resource    RoleResource[]
+  users       userRole[]
 }
 
 model userRole {
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId Int
-    role Role @relation(fields: [roleId], references: [id], onDelete: SetDefault)
-    roleId Int
+  userId Int
+  roleId Int
+  role   Role @relation(fields: [roleId], references: [id], onDelete: SetDefault)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@id([userId, roleId])
+  @@id([userId, roleId])
 }
 
 model RoleResource {
-    role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
-    roleId Int
-    resource Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
-    resourceId Int
+  roleId     Int
+  resourceId Int
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
-    @@id([roleId, resourceId])
+  @@id([roleId, resourceId])
 }
 
 model Resource {
-    id Int @id @default(autoincrement())
-    resource String
-
-    role RoleResource[]
+  id       Int            @id @default(autoincrement())
+  resource String
+  role     RoleResource[]
 }

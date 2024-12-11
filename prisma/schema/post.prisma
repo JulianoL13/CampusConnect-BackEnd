@@ -1,54 +1,50 @@
 model Post {
-    id Int  @id @default(autoincrement())
-    title String
-    text String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    author  Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-    community Community @relation(fields: [communityId], references: [id])
-    profileId Int
-    communityId Int
-    comments Comment[]
-    postVotes PostVote[]
+  id          Int        @id @default(autoincrement())
+  title       String
+  text        String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  profileId   Int
+  communityId Int
+  comments    Comment[]
+  community   Community  @relation(fields: [communityId], references: [id])
+  author      Profile    @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  postVotes   PostVote[]
 }
 
 model Comment {
-    id Int @id @default(autoincrement())
-    text String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-    profileId Int
-    post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-    parentId  Int?  
-    parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
-    replies   Comment[] @relation("CommentReplies")
-    postId Int
-    commentVotes CommentVote[]
+  id           Int           @id @default(autoincrement())
+  text         String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  profileId    Int
+  postId       Int
+  parentId     Int?
+  parent       Comment?      @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies      Comment[]     @relation("CommentReplies")
+  post         Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  profile      Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  commentVotes CommentVote[]
 }
 
 model PostVote {
-    id Int  @id @default(autoincrement())
-    postVote Boolean
+  id       Int     @id @default(autoincrement())
+  postVote Boolean
+  userId   Int     @unique
+  postId   Int
+  post     Post    @relation(fields: [postId], references: [id])
+  user     User    @relation(fields: [userId], references: [id])
 
-    user User @relation(fields: [userId], references: [id])
-    userId Int @unique
-    post Post @relation(fields: [postId], references: [id])
-    postId Int
-
-    @@unique([userId, postId])
+  @@unique([userId, postId])
 }
 
 model CommentVote {
-    id Int @id @default(autoincrement())
-    commentVote Boolean
+  id          Int     @id @default(autoincrement())
+  commentVote Boolean
+  userId      Int     @unique
+  commentId   Int
+  comment     Comment @relation(fields: [commentId], references: [id])
+  user        User    @relation(fields: [userId], references: [id])
 
-    user User @relation(fields: [userId], references: [id])
-    userId Int @unique
-    comment Comment @relation(fields: [commentId], references: [id])
-    commentId Int
-
-    @@unique([userId, commentId])
+  @@unique([userId, commentId])
 }
