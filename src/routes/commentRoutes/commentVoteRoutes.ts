@@ -13,17 +13,17 @@ const router = Router();
 
 router.get(
   "/comments/:commentId/votes",
-  /* authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => commentVoteController.countVotes(req, res),
 );
 router.post(
   "/comments/:commentId/vote",
-  /* authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => commentVoteController.toggleVote(req, res),
 );
 router.get(
   "/comments/:commentId/votes/user/:userId",
-  /* authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => commentVoteController.hasUserVoted(req, res),
 );
 

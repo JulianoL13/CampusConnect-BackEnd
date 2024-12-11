@@ -14,58 +14,46 @@ const authMiddleware = new AuthMiddleware();
 
 const router = Router();
 
-router.get(
-  "/posts",
-  /*authMiddleware.authenticateToken,*/ (req, res) =>
-    postController.getAllPosts(req, res),
+router.get("/posts", authMiddleware.authenticateToken, (req, res) =>
+  postController.getAllPosts(req, res),
 );
-router.get(
-  "/posts/:id",
-  /* authMiddleware.authenticateToken, */ (req, res) =>
-    postController.getPostById(req, res),
+router.get("/posts/:id", authMiddleware.authenticateToken, (req, res) =>
+  postController.getPostById(req, res),
 );
 router.get(
   "/posts/profile/:profileId",
-  /*  authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => postController.getPostsByProfileId(req, res),
 );
 router.get(
   "/posts/community/:communityId",
-  /* authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => postController.getPostsByCommunityId(req, res),
 );
-router.get(
-  "/posts/search",
-  /* authMiddleware.authenticateToken, */ (req, res) =>
-    postController.searchPosts(req, res),
+router.get("/posts/search", authMiddleware.authenticateToken, (req, res) =>
+  postController.searchPosts(req, res),
 );
 router.get(
   "/posts/count/profile/:profileId",
-  /* authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => postController.countPostsByProfileId(req, res),
 );
 router.get(
   "/posts/count/community/:communityId",
-  /* authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => postController.countPostsByCommunityId(req, res),
 );
-router.post(
-  "/posts",
-  /* authMiddleware.authenticateToken, */ (req, res) =>
-    postController.createPost(req, res),
+router.post("/posts", authMiddleware.authenticateToken, (req, res) =>
+  postController.createPost(req, res),
 );
 router.put("/posts/:id", authMiddleware.authenticateToken, (req, res) =>
   postController.updatePost(req, res),
 );
-router.delete(
-  "/posts/:id",
-  /* authMiddleware.authenticateToken, */ (req, res) =>
-    postController.deletePost(req, res),
+router.delete("/posts/:id", authMiddleware.authenticateToken, (req, res) =>
+  postController.deletePost(req, res),
 );
-router.get(
-  "/posts/cursor",
-  /* authMiddleware.authenticateToken, */ (req, res) =>
-    postController.fetchPostsWithCursor(req, res),
+router.get("/posts/cursor", authMiddleware.authenticateToken, (req, res) =>
+  postController.fetchPostsWithCursor(req, res),
 );
 
 export default router;

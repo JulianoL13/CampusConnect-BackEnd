@@ -12,17 +12,17 @@ const authMiddleware = new AuthMiddleware();
 
 router.get(
   "/posts/:postId/votes",
-  /*  authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => postVoteController.countVotes(req, res),
 );
 router.post(
   "/posts/:postId/votes",
-  /*  authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => postVoteController.toggleVote(req, res),
 );
 router.get(
   "/posts/:postId/votes/users/:userId",
-  /* authMiddleware.authenticateToken, */
+  authMiddleware.authenticateToken,
   (req, res) => postVoteController.hasUserVoted(req, res),
 );
 
