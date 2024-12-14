@@ -82,7 +82,8 @@ export class AuthService {
           : { connect: [] },
     };
 
-    await this.userRepository.createUser(userCreateData);
+    const createdUser = await this.userRepository.createUser(userCreateData);
+    return createdUser;
   };
 
   login = async (credentials: { email: string; password: string }) => {

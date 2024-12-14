@@ -22,10 +22,11 @@ export class AuthController {
     try {
       const userData = req.body;
 
-      await this.authService.register(userData);
+      const user = await this.authService.register(userData);
 
       return res.status(201).json({
         message: "User successfully registered",
+        user,
       });
     } catch (error) {
       console.error(error);
