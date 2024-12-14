@@ -104,11 +104,15 @@ export class AuthService {
       throw new Error("Profile doesn't exist");
     }
 
-    const token = this.generateToken(user.id, user.fullName, profile.id);
+    const token = this.generateToken(
+      user.id,
+      user.fullName,
+      user.email,
+      profile.id,
+    );
 
     return {
       user: {
-        profileId: profile.id,
         id: user.id,
         email: user.email,
         fullName: user.fullName,
@@ -142,10 +146,11 @@ export class AuthService {
 
   private generateToken = (
     userId: number,
-    fullName: String,
+    fullName: string,
+    email: string,
     profileId: number,
   ): string => {
-    return jwt.sign({ userId, fullName, profileId }, this.JWT_SECRET, {
+    return jwt.sign({ userId, email, fullName, profileId }, this.JWT_SECRET, {
       expiresIn: this.JWT_EXPIRATION,
     });
   };
