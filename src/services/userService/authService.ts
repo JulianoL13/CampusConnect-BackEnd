@@ -113,6 +113,7 @@ export class AuthService {
 
     return {
       user: {
+        profile: profile.id,
         id: user.id,
         email: user.email,
         fullName: user.fullName,

@@ -46,6 +46,7 @@ export class AuthController {
         message: "Successfully logged in",
         user: {
           id: user.id,
+          profileId: user.profile,
           email: user.email,
           fullName: user.fullName,
         },
