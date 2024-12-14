@@ -1,5 +1,6 @@
 import prisma from "../../models/prisma";
-import { Profile } from "@prisma/client";
+import { Profile, User } from "@prisma/client";
+import { UserRepository } from "./userRepository";
 
 export class ProfileRepository {
   createProfile = async (data: {
@@ -37,5 +38,17 @@ export class ProfileRepository {
 
   deleteProfile = async (id: number): Promise<Profile> => {
     return await prisma.profile.delete({ where: { id } });
+  };
+
+  getProfileByUserId = async (userId: number): Promise<Profile | null> => {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        profile: true,
+      },
+    });
+    return user?.profile || null;
   };
 }

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../../services/userService/authService";
 import { UserRepository } from "../../repositories/userRepository/userRepository";
+import { ProfileRepository } from "../../repositories/userRepository/profileRepository";
 
 type ExpressHandler = (
   req: Request,
@@ -12,8 +13,9 @@ export class AuthController {
   private authService: AuthService;
 
   constructor(userRepository?: UserRepository) {
-    const repository = userRepository || new UserRepository();
-    this.authService = new AuthService(repository);
+    const userRepo = userRepository || new UserRepository();
+    const profileRepo = new ProfileRepository();
+    this.authService = new AuthService(userRepo, profileRepo);
   }
 
   public register: ExpressHandler = async (req, res) => {

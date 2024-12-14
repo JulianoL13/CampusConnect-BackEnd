@@ -2,14 +2,17 @@ import { Role, User } from "@prisma/client";
 import { UserRepository } from "../../repositories/userRepository/userRepository";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { ProfileRepository } from "../../repositories/userRepository/profileRepository";
 
 export class AuthService {
   private userRepository: UserRepository;
   private JWT_SECRET: string;
   private JWT_EXPIRATION: string;
+  private profileRespository: ProfileRepository;
 
   public constructor(
     userRepository: UserRepository,
+    profileRepository: ProfileRepository,
     jwtSecret: string = process.env.JWT_SECRET || "",
     jwtExpiration: string = "1h",
   ) {
@@ -17,6 +20,7 @@ export class AuthService {
       console.log("JWT_SECTRET undefined, changing to fallback");
       jwtSecret = "fallback";
     }
+    this.profileRespository = profileRepository;
     this.userRepository = userRepository;
     this.JWT_SECRET = jwtSecret;
     this.JWT_EXPIRATION = jwtExpiration;
@@ -94,10 +98,16 @@ export class AuthService {
       throw new Error("Invalid email or password");
     }
 
-    const token = this.generateToken(user.id, user.fullName);
+    const profile = await this.profileRespository.getProfileByUserId(user.id);
+    if (!profile) {
+      throw new Error("Profile doesn't exist");
+    }
+
+    const token = this.generateToken(user.id, user.fullName, profile.id);
 
     return {
       user: {
+        profileId: profile.id,
         id: user.id,
         email: user.email,
         fullName: user.fullName,
@@ -129,8 +139,12 @@ export class AuthService {
     return user;
   };
 
-  private generateToken = (userId: number, fullName: String): string => {
-    return jwt.sign({ userId, fullName }, this.JWT_SECRET, {
+  private generateToken = (
+    userId: number,
+    fullName: String,
+    profileId: number,
+  ): string => {
+    return jwt.sign({ userId, fullName, profileId }, this.JWT_SECRET, {
       expiresIn: this.JWT_EXPIRATION,
     });
   };
